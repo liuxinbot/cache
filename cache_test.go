@@ -2,6 +2,7 @@ package cache
 
 import (
 	"fmt"
+	"sort"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -121,6 +122,9 @@ func ExampleCache() {
 
 	// List all items
 	items := store.List()
+	sort.Slice(items, func(i, j int) bool {
+		return items[i].(string) < items[j].(string)
+	})
 	fmt.Println(items)
 
 	// Get an item by key
